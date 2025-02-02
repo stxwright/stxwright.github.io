@@ -1,37 +1,16 @@
 ﻿{
   "teams": [
-    "Team A",
-    "Team B",
-    "Team C",
-    "Team D"
+    { "id": "T1", "name": "Old Grammarians Touch Team" },
+    { "id": "T2", "name": "Flames" },
+    { "id": "T3", "name": "Team C" },
+    { "id": "T4", "name": "Team D" }
   ],
   "matches": [
-    {
-      "id": 1,
-      "date": "2025-02-10",
-      "time": "14:00",
-      "team1": "Team A",
-      "team2": "Team B",
-      "score1": null,
-      "score2": null
-    },
-    {
-      "id": 2,
-      "date": "2025-02-10",
-      "time": "16:00",
-      "team1": "Team C",
-      "team2": "Team D",
-      "score1": 12,
-      "score2": 8
-    },
-    {
-      "id": 3,
-      "date": "2025-02-11",
-      "time": "14:00",
-      "team1": "Team A",
-      "team2": "Team C",
-      "score1": null,
-      "score2": null
-    }
+    { "time": "10:00", "team1": "T1", "score1": null, "team2": "T2", "score2": null },
+    { "time": "11:00", "team1": "T3", "score1": null, "team2": "T4", "score2": null },
+    { "time": "12:00", "team1": "T1", "score1": null, "team2": "T3", "score2": null },
+    { "time": "13:00", "team1": "T2", "score1": null, "team2": "T4", "score2": null },
+    { "time": "14:00", "team1": "T1", "score1": null, "team2": "T4", "score2": null },
+    { "time": "15:00", "team1": "T2", "score1": null, "team2": "T3", "score2": null }
   ]
 }

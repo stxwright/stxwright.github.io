@@ -3,20 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rugby Tournament</title>
+    <title>Old Grammarians Rugby Tournament</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        table { width: 80%; margin: 20px auto; border-collapse: collapse; }
-        th, td { border: 1px solid black; padding: 10px; }
-        th { background-color: #f4f4f4; }
+        :root {
+            --primary-color: rgb(34, 45, 63);
+            --secondary-color: rgb(155, 197, 196);
+            --accent-color: rgb(253, 27, 38);
+            --body-bg-color: var(--primary-color);
+            --table-bg-color: white;
+            --text-color: white;
+            --table-text-color: black;
+            --row-even-bg: rgb(230, 230, 230);
+            --row-odd-bg: rgb(255, 255, 255);
+        }
+
+        body {
+            font-family: "Roboto", serif;
+            text-align: center;
+            background-color: var(--body-bg-color);
+            color: var(--text-color);
+        }
+        h1 { color: var(--text-color); }
+        h2 { color: var(--accent-color); }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: var(--table-bg-color);
+            color: var(--table-text-color);
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+        th { background-color: var(--secondary-color); }
+        tr:nth-child(even) { background-color: var(--row-even-bg); }
+        tr:nth-child(odd) { background-color: var(--row-odd-bg); }
     </style>
 </head>
 <body>
-<h1>Rugby Tournament Fixtures & Results</h1>
+<h1>Old Grammarians Rugby Tournament</h1>
+
+<h2>Fixtures</h2>
 <table id="fixtures">
     <thead>
     <tr>
-        <th>Date</th>
         <th>Time</th>
         <th>Team 1</th>
         <th>Score</th>
@@ -55,18 +89,19 @@
             tableBody.innerHTML = '';
             const standings = {};
 
+            const teams = Object.fromEntries(data.teams.map(team => [team.id, team.name]));
+
             data.teams.forEach(team => {
-                standings[team] = { played: 0, won: 0, drawn: 0, lost: 0, points: 0 };
+                standings[team.id] = { played: 0, won: 0, drawn: 0, lost: 0, points: 0 };
             });
 
             data.matches.forEach(match => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                        <td>${match.date}</td>
                         <td>${match.time}</td>
-                        <td>${match.team1}</td>
+                        <td>${teams[match.team1]}</td>
                         <td>${match.score1 !== null ? match.score1 : '-'}</td>
-                        <td>${match.team2}</td>
+                        <td>${teams[match.team2]}</td>
                         <td>${match.score2 !== null ? match.score2 : '-'}</td>
                     `;
                 tableBody.appendChild(row);
@@ -95,10 +130,10 @@
             const tableStandings = document.querySelector('#league-table tbody');
             tableStandings.innerHTML = '';
 
-            Object.entries(standings).sort((a, b) => b[1].points - a[1].points).forEach(([team, stats]) => {
+            Object.entries(standings).sort((a, b) => b[1].points - a[1].points).forEach(([teamId, stats]) => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                        <td>${team}</td>
+                        <td>${teams[teamId]}</td>
                         <td>${stats.played}</td>
                         <td>${stats.won}</td>
                         <td>${stats.drawn}</td>
