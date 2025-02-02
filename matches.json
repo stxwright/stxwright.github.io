@@ -1,0 +1,37 @@
+﻿{
+  "teams": [
+    "Team A",
+    "Team B",
+    "Team C",
+    "Team D"
+  ],
+  "matches": [
+    {
+      "id": 1,
+      "date": "2025-02-10",
+      "time": "14:00",
+      "team1": "Team A",
+      "team2": "Team B",
+      "score1": null,
+      "score2": null
+    },
+    {
+      "id": 2,
+      "date": "2025-02-10",
+      "time": "16:00",
+      "team1": "Team C",
+      "team2": "Team D",
+      "score1": 12,
+      "score2": 8
+    },
+    {
+      "id": 3,
+      "date": "2025-02-11",
+      "time": "14:00",
+      "team1": "Team A",
+      "team2": "Team C",
+      "score1": null,
+      "score2": null
+    }
+  ]
+}
