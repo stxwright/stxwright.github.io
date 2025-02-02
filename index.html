@@ -6,7 +6,8 @@
     <title>Old Grammarians Rugby Tournament</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
     <style>
         :root {
             --primary-color: rgb(34, 45, 63);
@@ -25,60 +26,90 @@
             text-align: center;
             background-color: var(--body-bg-color);
             color: var(--text-color);
+            margin: 0;
         }
-        h1 { color: var(--text-color); }
-        h2 { color: var(--accent-color); }
+
+        h1 {
+            color: var(--text-color);
+        }
+
+        h2 {
+            color: var(--accent-color);
+        }
+
+        .tables-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
         table {
-            width: 80%;
+            width: 70vw;
+            min-width: 377px;
+            max-width: 800px;
             margin: 20px auto;
             border-collapse: collapse;
             background-color: var(--table-bg-color);
             color: var(--table-text-color);
         }
+
         th, td {
             border: 1px solid black;
             padding: 10px;
         }
-        th { background-color: var(--secondary-color); }
-        tr:nth-child(even) { background-color: var(--row-even-bg); }
-        tr:nth-child(odd) { background-color: var(--row-odd-bg); }
+
+        th {
+            background-color: var(--secondary-color);
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--row-even-bg);
+        }
+
+        tr:nth-child(odd) {
+            background-color: var(--row-odd-bg);
+        }
     </style>
 </head>
 <body>
 <h1>Old Grammarians Rugby Tournament</h1>
 
-<h2>Fixtures</h2>
-<table id="fixtures">
-    <thead>
-    <tr>
-        <th>Time</th>
-        <th>Team 1</th>
-        <th>Score</th>
-        <th>Team 2</th>
-        <th>Score</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Matches will be loaded here -->
-    </tbody>
-</table>
+<div class="tables-container">
+    <h2>Fixtures</h2>
+    <table id="fixtures">
+        <thead>
+        <tr>
+            <th>Time</th>
+            <th>Team 1</th>
+            <th>Score</th>
+            <th>Team 2</th>
+            <th>Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Matches will be loaded here -->
+        </tbody>
+    </table>
 
-<h2>League Table</h2>
-<table id="league-table">
-    <thead>
-    <tr>
-        <th>Team</th>
-        <th>Played</th>
-        <th>Won</th>
-        <th>Drawn</th>
-        <th>Lost</th>
-        <th>Points</th>
-    </tr>
-    </thead>
-    <tbody>
-    <!-- League table will be populated here -->
-    </tbody>
-</table>
+    <h2>League Table</h2>
+    <table id="league-table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Team</th>
+            <th>P</th>
+            <th>W</th>
+            <th>D</th>
+            <th>L</th>
+            <th>Pts</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- League table will be populated here -->
+        </tbody>
+    </table>
+</div>
 
 <script>
     async function loadMatches() {
@@ -92,7 +123,7 @@
             const teams = Object.fromEntries(data.teams.map(team => [team.id, team.name]));
 
             data.teams.forEach(team => {
-                standings[team.id] = { played: 0, won: 0, drawn: 0, lost: 0, points: 0 };
+                standings[team.id] = {played: 0, won: 0, drawn: 0, lost: 0, points: 0};
             });
 
             data.matches.forEach(match => {
@@ -130,9 +161,10 @@
             const tableStandings = document.querySelector('#league-table tbody');
             tableStandings.innerHTML = '';
 
-            Object.entries(standings).sort((a, b) => b[1].points - a[1].points).forEach(([teamId, stats]) => {
+            Object.entries(standings).sort((a, b) => b[1].points - a[1].points).forEach(([teamId, stats], index) => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
+                        <td>${index + 1}</td>
                         <td>${teams[teamId]}</td>
                         <td>${stats.played}</td>
                         <td>${stats.won}</td>
@@ -146,6 +178,7 @@
             console.error('Error loading matches:', error);
         }
     }
+
     loadMatches();
 </script>
 </body>

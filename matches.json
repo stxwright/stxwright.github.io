@@ -6,9 +6,9 @@
     { "id": "T4", "name": "Team D" }
   ],
   "matches": [
-    { "time": "10:00", "team1": "T1", "score1": null, "team2": "T2", "score2": null },
-    { "time": "11:00", "team1": "T3", "score1": null, "team2": "T4", "score2": null },
-    { "time": "12:00", "team1": "T1", "score1": null, "team2": "T3", "score2": null },
+    { "time": "10:00", "team1": "T1", "score1": 16, "team2": "T2", "score2": 4 },
+    { "time": "11:00", "team1": "T3", "score1": 10, "team2": "T4", "score2": 10 },
+    { "time": "12:00", "team1": "T1", "score1": 9, "team2": "T3", "score2": 14 },
     { "time": "13:00", "team1": "T2", "score1": null, "team2": "T4", "score2": null },
     { "time": "14:00", "team1": "T1", "score1": null, "team2": "T4", "score2": null },
     { "time": "15:00", "team1": "T2", "score1": null, "team2": "T3", "score2": null }
