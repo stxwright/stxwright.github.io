@@ -1,0 +1,126 @@
+﻿:root {
+    --primary-color: rgb(34, 45, 63);
+    --secondary-color: rgb(155, 197, 196);
+    --accent-color: rgb(253, 27, 38);
+    --body-bg-color: var(--primary-color);
+    --table-bg-color: white;
+    --text-color: white;
+    --table-text-color: black;
+    --row-even-bg: rgb(230, 230, 230);
+    --row-odd-bg: rgb(255, 255, 255);
+}
+
+
+/* table */
+table {
+    width: 70vw;
+    min-width: 377px;
+    max-width: 800px;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    background-color: var(--table-bg-color);
+    color: var(--table-text-color);
+}
+
+table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+    color: var(--accent-color);
+}
+
+table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+}
+
+table th,
+table td {
+    padding: .625em;
+    text-align: center;
+}
+
+table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    background-color: var(--secondary-color);
+}
+
+@media screen and (max-width: 374px) {
+    table {
+        border: 0;
+        width: 100%;
+        min-width: unset;
+    }
+
+    table caption {
+        font-size: 1.3em;
+    }
+
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: .625em;
+    }
+
+    table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: .8em;
+        text-align: right;
+    }
+
+    table td::before {
+        /*
+        * aria-label has no advantage, it won't be read inside a table
+        content: attr(aria-label);
+        */
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    table td:last-child {
+        border-bottom: 0;
+    }
+}
+
+
+/* general styling */
+body {
+    font-family: "Roboto", serif;
+    text-align: center;
+    background-color: var(--body-bg-color);
+    color: var(--text-color);
+    margin: 0;
+}
+
+h1 {
+    color: var(--text-color);
+}
+
+h2 {
+    color: var(--accent-color);
+}
+
+.tables-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
