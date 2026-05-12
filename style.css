@@ -1,126 +1,105 @@
-﻿:root {
-    --primary-color: rgb(34, 45, 63);
-    --secondary-color: rgb(155, 197, 196);
-    --accent-color: rgb(253, 27, 38);
-    --body-bg-color: var(--primary-color);
-    --table-bg-color: white;
-    --text-color: white;
-    --table-text-color: black;
-    --row-even-bg: rgb(230, 230, 230);
-    --row-odd-bg: rgb(255, 255, 255);
+:root {
+    --bg-color: #f8fafc;
+    --card-bg: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --accent: #3b82f6;
+    --border: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
-
-/* table */
-table {
-    width: 70vw;
-    min-width: 377px;
-    max-width: 800px;
-    border: 1px solid #ccc;
-    border-collapse: collapse;
-    margin: 0;
-    padding: 0;
-    background-color: var(--table-bg-color);
-    color: var(--table-text-color);
-}
-
-table caption {
-    font-size: 1.5em;
-    margin: .5em 0 .75em;
-    color: var(--accent-color);
-}
-
-table tr {
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    padding: .35em;
-}
-
-table th,
-table td {
-    padding: .625em;
-    text-align: center;
-}
-
-table th {
-    font-size: .85em;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    background-color: var(--secondary-color);
-}
-
-@media screen and (max-width: 374px) {
-    table {
-        border: 0;
-        width: 100%;
-        min-width: unset;
-    }
-
-    table caption {
-        font-size: 1.3em;
-    }
-
-    table thead {
-        border: none;
-        clip: rect(0 0 0 0);
-        height: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-        width: 1px;
-    }
-
-    table tr {
-        border-bottom: 3px solid #ddd;
-        display: block;
-        margin-bottom: .625em;
-    }
-
-    table td {
-        border-bottom: 1px solid #ddd;
-        display: block;
-        font-size: .8em;
-        text-align: right;
-    }
-
-    table td::before {
-        /*
-        * aria-label has no advantage, it won't be read inside a table
-        content: attr(aria-label);
-        */
-        content: attr(data-label);
-        float: left;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
-
-    table td:last-child {
-        border-bottom: 0;
-    }
-}
-
-
-/* general styling */
 body {
-    font-family: "Roboto", serif;
-    text-align: center;
-    background-color: var(--body-bg-color);
-    color: var(--text-color);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    width: 90%;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
 }
 
 h1 {
-    color: var(--text-color);
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-primary);
 }
 
-h2 {
-    color: var(--accent-color);
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
 }
 
-.tables-container {
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: var(--accent);
+}
+
+.project-card h2 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.25rem;
+    color: var(--accent);
+}
+
+.project-card p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.link-text {
+    margin-top: 1.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--accent);
+}
+
+footer {
+    text-align: center;
+    margin-top: 4rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
 }

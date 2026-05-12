@@ -3,121 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Old Grammarians Rugby Tournament</title>
+    <title>stxwright | Projects</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>Old Grammarians Rugby Tournament</h1>
+    <div class="container">
+        <header>
+            <h1>stxwright</h1>
+            <p class="subtitle">Public Projects & Tools</p>
+        </header>
+        
+        <main class="projects-grid">
+            <a href="https://stxwright.github.io/southgate/" class="project-card">
+                <h2>Southgate</h2>
+                <p>A revamped version of the Southgate Cycling Club website.</p>
+                <span class="link-text">Visit Project &rarr;</span>
+            </a>
 
-<div class="tables-container">
-    <table id="fixtures">
-        <caption>Fixtures</caption>
-        <thead>
-        <tr>
-            <th>Time</th>
-            <th>Team 1</th>
-            <th>Score</th>
-            <th>Team 2</th>
-            <th>Score</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Matches will be loaded here -->
-        </tbody>
-    </table>
+            <a href="https://stxwright.github.io/risk-of-ruin/" class="project-card">
+                <h2>Risk of Ruin</h2>
+                <p>A calculator or analysis tool for assessing the probability of losing capital in betting or investment scenarios.</p>
+                <span class="link-text">Visit Project &rarr;</span>
+            </a>
+        </main>
 
-    <table id="league-table">
-        <caption>League Table</caption>
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Team</th>
-            <th scope="col">P</th>
-            <th scope="col">W</th>
-            <th scope="col">D</th>
-            <th scope="col">L</th>
-            <th scope="col">Pts</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- League table will be populated here -->
-        </tbody>
-    </table>
-</div>
-
-<script>
-    async function loadMatches() {
-        try {
-            const response = await fetch('matches.json');
-            const data = await response.json();
-            const tableBody = document.querySelector('#fixtures tbody');
-            tableBody.innerHTML = '';
-            const standings = {};
-
-            const teams = Object.fromEntries(data.teams.map(team => [team.id, team.name]));
-
-            data.teams.forEach(team => {
-                standings[team.id] = {played: 0, won: 0, drawn: 0, lost: 0, points: 0};
-            });
-
-            data.matches.forEach(match => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                        <td data-label="Time">${match.time}</td>
-                        <td data-label="Team 1">${teams[match.team1]}</td>
-                        <td data-label="Score">${match.score1 !== null ? match.score1 : '-'}</td>
-                        <td data-label="Team 2">${teams[match.team2]}</td>
-                        <td data-label="Score">${match.score2 !== null ? match.score2 : '-'}</td>
-                    `;
-                tableBody.appendChild(row);
-
-                if (match.score1 !== null && match.score2 !== null) {
-                    standings[match.team1].played++;
-                    standings[match.team2].played++;
-
-                    if (match.score1 > match.score2) {
-                        standings[match.team1].won++;
-                        standings[match.team2].lost++;
-                        standings[match.team1].points += 3;
-                    } else if (match.score1 < match.score2) {
-                        standings[match.team2].won++;
-                        standings[match.team1].lost++;
-                        standings[match.team2].points += 3;
-                    } else {
-                        standings[match.team1].drawn++;
-                        standings[match.team2].drawn++;
-                        standings[match.team1].points += 1;
-                        standings[match.team2].points += 1;
-                    }
-                }
-            });
-
-            const tableStandings = document.querySelector('#league-table tbody');
-            tableStandings.innerHTML = '';
-
-            Object.entries(standings).sort((a, b) => b[1].points - a[1].points).forEach(([teamId, stats], index) => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                        <td data-label="#">${index + 1}</td>
-                        <td data-label="Team">${teams[teamId]}</td>
-                        <td data-label="Played">${stats.played}</td>
-                        <td data-label="Won">${stats.won}</td>
-                        <td data-label="Drawn">${stats.drawn}</td>
-                        <td data-label="Lost">${stats.lost}</td>
-                        <td data-label="Pts">${stats.points}</td>
-                    `;
-                tableStandings.appendChild(row);
-            });
-        } catch (error) {
-            console.error('Error loading matches:', error);
-        }
-    }
-
-    loadMatches();
-</script>
+        <footer>
+            <p>&copy; 2026 stxwright. Hosted on GitHub Pages.</p>
+        </footer>
+    </div>
 </body>
 </html>
